@@ -4,4 +4,4 @@
 // export { fetchPosts } from './postService';
 
 // Export request instance and http methods
-export { default as request, http } from './request';
+export { default as request, http } from '@/lib/request';

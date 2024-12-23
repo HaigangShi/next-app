@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { envConfig } from '@/config/env';
 import { Storage, Cookie } from '@/utils';
 
 // 处理响应错误
@@ -29,7 +30,7 @@ const codeMessage = (error) => {
 
 // 创建 axios 实例
 const request = axios.create({
-  baseURL: '/api', // 基础URL
+  baseURL: envConfig.API_BASE_URL, // 基础URL
   timeout: 15000,  // 请求超时时间
   headers: {
     'Content-Type': 'application/json',
