@@ -19,7 +19,7 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import { Cookie } from '@/utils';
+import { Cookie } from '@/lib/utils';
 
 export default function useCookie(name, initialValue = null, options = {}) {
   // 获取初始值
@@ -38,10 +38,10 @@ export default function useCookie(name, initialValue = null, options = {}) {
     try {
       // 允许value是一个函数，保持与useState相同的API
       const valueToStore = newValue instanceof Function ? newValue(value) : newValue;
-      
+
       // 保存到state
       setValue(valueToStore);
-      
+
       // 保存到cookie
       Cookie.set(name, valueToStore, { ...options, ...updateOptions });
     } catch (error) {

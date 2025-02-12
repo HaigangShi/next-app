@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { envConfig } from '@/config/env';
-import { Storage, Cookie } from '@/utils';
+import { Storage, Cookie } from '@/lib/utils';
 
 // 处理响应错误
 const codeMessage = (error) => {
@@ -30,7 +29,7 @@ const codeMessage = (error) => {
 
 // 创建 axios 实例
 const request = axios.create({
-  baseURL: envConfig.API_BASE_URL, // 基础URL
+  baseURL: 'https://api.example.com', // 基础URL
   timeout: 15000,  // 请求超时时间
   headers: {
     'Content-Type': 'application/json',
@@ -59,13 +58,13 @@ request.interceptors.response.use(
   (response) => {
     // 对响应数据做点什么
     const { data } = response;
-    
+
     // 这里可以根据你的后端接口规范调整
     // 假设后端返回格式为 { code: number, data: any, message: string }
     if (data.code === 200) {
       return data.data;
     }
-    
+
     // 处理其他响应状态码
     const error = new Error(data.message || 'Unknown error');
     error.code = data.code;
@@ -89,7 +88,7 @@ request.interceptors.response.use(
 
 // 封装 HTTP 方法
 export const http = {
-  get: (url, params, config = {}) => 
+  get: (url, params, config = {}) =>
     request.get(url, { ...config, params }),
 
   post: (url, data, config = {}) =>

@@ -10,7 +10,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import Storage from '@/utils';
+import { Storage } from '@/lib/utils';
 
 export default function useStorage(key, initialValue = null, options = {}) {
   const { expires } = options;
@@ -30,10 +30,10 @@ export default function useStorage(key, initialValue = null, options = {}) {
     try {
       // 允许value是一个函数，保持与useState相同的API
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-      
+
       // 保存到state
       setStoredValue(valueToStore);
-      
+
       // 保存到Storage
       Storage.set(key, valueToStore, expires);
     } catch (error) {
